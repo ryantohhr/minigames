@@ -9,8 +9,14 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RockPaperScissorsRouteImport } from './routes/rock-paper-scissors'
 import { Route as IndexRouteImport } from './routes/index'
 
+const RockPaperScissorsRoute = RockPaperScissorsRouteImport.update({
+  id: '/rock-paper-scissors',
+  path: '/rock-paper-scissors',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +25,39 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/rock-paper-scissors': typeof RockPaperScissorsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/rock-paper-scissors': typeof RockPaperScissorsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/rock-paper-scissors': typeof RockPaperScissorsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/rock-paper-scissors'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/rock-paper-scissors'
+  id: '__root__' | '/' | '/rock-paper-scissors'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  RockPaperScissorsRoute: typeof RockPaperScissorsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/rock-paper-scissors': {
+      id: '/rock-paper-scissors'
+      path: '/rock-paper-scissors'
+      fullPath: '/rock-paper-scissors'
+      preLoaderRoute: typeof RockPaperScissorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +70,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  RockPaperScissorsRoute: RockPaperScissorsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
