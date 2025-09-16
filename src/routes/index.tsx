@@ -8,9 +8,14 @@ function Home() {
   const minigames = [
     {
       path: "/rock-paper-scissors",
-      title: " Rock Paper Scissors",
+      title: "Rock Paper Scissors",
+    },
+    {
+      path: "/stopwatch",
+      title: "Stopwatch",
     },
   ];
+
   return (
     <div className="p-2">
       {minigames.map((game) => (

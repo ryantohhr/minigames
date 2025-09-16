@@ -9,9 +9,15 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as StopwatchRouteImport } from './routes/stopwatch'
 import { Route as RockPaperScissorsRouteImport } from './routes/rock-paper-scissors'
 import { Route as IndexRouteImport } from './routes/index'
 
+const StopwatchRoute = StopwatchRouteImport.update({
+  id: '/stopwatch',
+  path: '/stopwatch',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RockPaperScissorsRoute = RockPaperScissorsRouteImport.update({
   id: '/rock-paper-scissors',
   path: '/rock-paper-scissors',
@@ -26,31 +32,42 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/rock-paper-scissors': typeof RockPaperScissorsRoute
+  '/stopwatch': typeof StopwatchRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/rock-paper-scissors': typeof RockPaperScissorsRoute
+  '/stopwatch': typeof StopwatchRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/rock-paper-scissors': typeof RockPaperScissorsRoute
+  '/stopwatch': typeof StopwatchRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/rock-paper-scissors'
+  fullPaths: '/' | '/rock-paper-scissors' | '/stopwatch'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/rock-paper-scissors'
-  id: '__root__' | '/' | '/rock-paper-scissors'
+  to: '/' | '/rock-paper-scissors' | '/stopwatch'
+  id: '__root__' | '/' | '/rock-paper-scissors' | '/stopwatch'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   RockPaperScissorsRoute: typeof RockPaperScissorsRoute
+  StopwatchRoute: typeof StopwatchRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/stopwatch': {
+      id: '/stopwatch'
+      path: '/stopwatch'
+      fullPath: '/stopwatch'
+      preLoaderRoute: typeof StopwatchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/rock-paper-scissors': {
       id: '/rock-paper-scissors'
       path: '/rock-paper-scissors'
@@ -71,6 +88,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   RockPaperScissorsRoute: RockPaperScissorsRoute,
+  StopwatchRoute: StopwatchRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
