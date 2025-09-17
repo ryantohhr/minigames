@@ -18,6 +18,10 @@ function Home() {
       path: "/dice",
       title: "Dice",
     },
+    {
+      path: "/traffic-light",
+      title: "Traffic Light",
+    },
   ];
 
   return (

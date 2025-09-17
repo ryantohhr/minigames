@@ -9,11 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TrafficLightRouteImport } from './routes/traffic-light'
 import { Route as StopwatchRouteImport } from './routes/stopwatch'
 import { Route as RockPaperScissorsRouteImport } from './routes/rock-paper-scissors'
 import { Route as DiceRouteImport } from './routes/dice'
 import { Route as IndexRouteImport } from './routes/index'
 
+const TrafficLightRoute = TrafficLightRouteImport.update({
+  id: '/traffic-light',
+  path: '/traffic-light',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StopwatchRoute = StopwatchRouteImport.update({
   id: '/stopwatch',
   path: '/stopwatch',
@@ -40,12 +46,14 @@ export interface FileRoutesByFullPath {
   '/dice': typeof DiceRoute
   '/rock-paper-scissors': typeof RockPaperScissorsRoute
   '/stopwatch': typeof StopwatchRoute
+  '/traffic-light': typeof TrafficLightRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dice': typeof DiceRoute
   '/rock-paper-scissors': typeof RockPaperScissorsRoute
   '/stopwatch': typeof StopwatchRoute
+  '/traffic-light': typeof TrafficLightRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,25 @@ export interface FileRoutesById {
   '/dice': typeof DiceRoute
   '/rock-paper-scissors': typeof RockPaperScissorsRoute
   '/stopwatch': typeof StopwatchRoute
+  '/traffic-light': typeof TrafficLightRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dice' | '/rock-paper-scissors' | '/stopwatch'
+  fullPaths:
+    | '/'
+    | '/dice'
+    | '/rock-paper-scissors'
+    | '/stopwatch'
+    | '/traffic-light'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dice' | '/rock-paper-scissors' | '/stopwatch'
-  id: '__root__' | '/' | '/dice' | '/rock-paper-scissors' | '/stopwatch'
+  to: '/' | '/dice' | '/rock-paper-scissors' | '/stopwatch' | '/traffic-light'
+  id:
+    | '__root__'
+    | '/'
+    | '/dice'
+    | '/rock-paper-scissors'
+    | '/stopwatch'
+    | '/traffic-light'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,10 +87,18 @@ export interface RootRouteChildren {
   DiceRoute: typeof DiceRoute
   RockPaperScissorsRoute: typeof RockPaperScissorsRoute
   StopwatchRoute: typeof StopwatchRoute
+  TrafficLightRoute: typeof TrafficLightRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/traffic-light': {
+      id: '/traffic-light'
+      path: '/traffic-light'
+      fullPath: '/traffic-light'
+      preLoaderRoute: typeof TrafficLightRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/stopwatch': {
       id: '/stopwatch'
       path: '/stopwatch'
@@ -107,6 +135,7 @@ const rootRouteChildren: RootRouteChildren = {
   DiceRoute: DiceRoute,
   RockPaperScissorsRoute: RockPaperScissorsRoute,
   StopwatchRoute: StopwatchRoute,
+  TrafficLightRoute: TrafficLightRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
