@@ -14,6 +14,10 @@ function Home() {
       path: "/stopwatch",
       title: "Stopwatch",
     },
+    {
+      path: "/dice",
+      title: "Dice",
+    },
   ];
 
   return (
