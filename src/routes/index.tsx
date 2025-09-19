@@ -22,6 +22,10 @@ function Home() {
       path: "/traffic-light",
       title: "Traffic Light",
     },
+    {
+      path: "/quote-generator",
+      title: "Quote Generator",
+    },
   ];
 
   return (

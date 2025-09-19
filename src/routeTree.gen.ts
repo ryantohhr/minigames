@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as TrafficLightRouteImport } from './routes/traffic-light'
 import { Route as StopwatchRouteImport } from './routes/stopwatch'
 import { Route as RockPaperScissorsRouteImport } from './routes/rock-paper-scissors'
+import { Route as QuoteGeneratorRouteImport } from './routes/quote-generator'
 import { Route as DiceRouteImport } from './routes/dice'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -30,6 +31,11 @@ const RockPaperScissorsRoute = RockPaperScissorsRouteImport.update({
   path: '/rock-paper-scissors',
   getParentRoute: () => rootRouteImport,
 } as any)
+const QuoteGeneratorRoute = QuoteGeneratorRouteImport.update({
+  id: '/quote-generator',
+  path: '/quote-generator',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DiceRoute = DiceRouteImport.update({
   id: '/dice',
   path: '/dice',
@@ -44,6 +50,7 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dice': typeof DiceRoute
+  '/quote-generator': typeof QuoteGeneratorRoute
   '/rock-paper-scissors': typeof RockPaperScissorsRoute
   '/stopwatch': typeof StopwatchRoute
   '/traffic-light': typeof TrafficLightRoute
@@ -51,6 +58,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dice': typeof DiceRoute
+  '/quote-generator': typeof QuoteGeneratorRoute
   '/rock-paper-scissors': typeof RockPaperScissorsRoute
   '/stopwatch': typeof StopwatchRoute
   '/traffic-light': typeof TrafficLightRoute
@@ -59,6 +67,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/dice': typeof DiceRoute
+  '/quote-generator': typeof QuoteGeneratorRoute
   '/rock-paper-scissors': typeof RockPaperScissorsRoute
   '/stopwatch': typeof StopwatchRoute
   '/traffic-light': typeof TrafficLightRoute
@@ -68,15 +77,23 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/dice'
+    | '/quote-generator'
     | '/rock-paper-scissors'
     | '/stopwatch'
     | '/traffic-light'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dice' | '/rock-paper-scissors' | '/stopwatch' | '/traffic-light'
+  to:
+    | '/'
+    | '/dice'
+    | '/quote-generator'
+    | '/rock-paper-scissors'
+    | '/stopwatch'
+    | '/traffic-light'
   id:
     | '__root__'
     | '/'
     | '/dice'
+    | '/quote-generator'
     | '/rock-paper-scissors'
     | '/stopwatch'
     | '/traffic-light'
@@ -85,6 +102,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DiceRoute: typeof DiceRoute
+  QuoteGeneratorRoute: typeof QuoteGeneratorRoute
   RockPaperScissorsRoute: typeof RockPaperScissorsRoute
   StopwatchRoute: typeof StopwatchRoute
   TrafficLightRoute: typeof TrafficLightRoute
@@ -113,6 +131,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RockPaperScissorsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/quote-generator': {
+      id: '/quote-generator'
+      path: '/quote-generator'
+      fullPath: '/quote-generator'
+      preLoaderRoute: typeof QuoteGeneratorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dice': {
       id: '/dice'
       path: '/dice'
@@ -133,6 +158,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DiceRoute: DiceRoute,
+  QuoteGeneratorRoute: QuoteGeneratorRoute,
   RockPaperScissorsRoute: RockPaperScissorsRoute,
   StopwatchRoute: StopwatchRoute,
   TrafficLightRoute: TrafficLightRoute,
