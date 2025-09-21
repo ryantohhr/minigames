@@ -26,6 +26,10 @@ function Home() {
       path: "/quote-generator",
       title: "Quote Generator",
     },
+    {
+      path: "/gradient",
+      title: "Gradient",
+    },
   ];
 
   return (
