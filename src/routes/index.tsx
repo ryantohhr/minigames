@@ -30,6 +30,10 @@ function Home() {
       path: "/gradient",
       title: "Gradient",
     },
+    {
+      path: "/tic-tac-toe",
+      title: "Tic Tac Toe",
+    },
   ];
 
   return (
