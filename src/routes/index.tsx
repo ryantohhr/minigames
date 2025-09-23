@@ -34,6 +34,10 @@ function Home() {
       path: "/tic-tac-toe",
       title: "Tic Tac Toe",
     },
+    {
+      path: "/wack-a-mole",
+      title: "Wack A Mole",
+    },
   ];
 
   return (
