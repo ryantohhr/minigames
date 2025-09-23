@@ -57,11 +57,14 @@ function RouteComponent() {
   function checkWinner() {
     console.log("mark");
     for (let i = 0; i < board.length; i++) {
-      if (checkLine(board[i])) return true;
-      if (checkLine([board[0][i], board[1][i], board[2][i]])) return true;
+      if (
+        checkLine(board[i]) ||
+        checkLine([board[0][i], board[1][i], board[2][i]]) ||
+        checkLine([board[0][0], board[1][1], board[2][2]]) ||
+        checkLine([board[0][0], board[1][1], board[2][2]])
+      )
+        return true;
     }
-    checkLine([board[0][0], board[1][1], board[2][2]]);
-    checkLine([board[0][2], board[1][1], board[2][0]]);
     return false;
   }
 
@@ -71,22 +74,37 @@ function RouteComponent() {
     setCurrentPlayer((prev) => !prev);
   }
 
+  function resetGame() {
+    setBoard(emptyBoard);
+    setCurrentPlayer(true);
+    setGameState("playing");
+    setWinner("");
+  }
+
   return (
     <div className="h-screen w-screen flex flex-col gap-10 justify-center items-center">
       {gameState === "done" && (
-        <h1 className="font-semibold text-xl flex gap-1">
-          {winner === "" ? (
-            "It's a draw!"
-          ) : winner === "X" ? (
-            <>
-              <X /> <span>wins!</span>
-            </>
-          ) : (
-            <>
-              <Circle /> <span>wins!</span>
-            </>
-          )}
-        </h1>
+        <div className="flex flex-col justify-center items-center gap-5">
+          <h1 className="font-semibold text-xl flex gap-1">
+            {winner === "" ? (
+              "It's a draw!"
+            ) : winner === "X" ? (
+              <>
+                <X /> <span>wins!</span>
+              </>
+            ) : (
+              <>
+                <Circle /> <span>wins!</span>
+              </>
+            )}
+          </h1>
+          <button
+            onClick={resetGame}
+            className="bg-gray-400 px-5 py-2 rounded-md text-black font-semibold"
+          >
+            Play Again
+          </button>
+        </div>
       )}
       <div className="h-[400px] w-[400px] grid grid-cols-3 grid-rows-3 bg-gray-700 rounded-md p-5 gap-5">
         {board.map((row, rowIndex) =>

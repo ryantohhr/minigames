@@ -10,15 +10,22 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TrafficLightRouteImport } from './routes/traffic-light'
+import { Route as TicTacToeRouteImport } from './routes/tic-tac-toe'
 import { Route as StopwatchRouteImport } from './routes/stopwatch'
 import { Route as RockPaperScissorsRouteImport } from './routes/rock-paper-scissors'
 import { Route as QuoteGeneratorRouteImport } from './routes/quote-generator'
+import { Route as GradientRouteImport } from './routes/gradient'
 import { Route as DiceRouteImport } from './routes/dice'
 import { Route as IndexRouteImport } from './routes/index'
 
 const TrafficLightRoute = TrafficLightRouteImport.update({
   id: '/traffic-light',
   path: '/traffic-light',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TicTacToeRoute = TicTacToeRouteImport.update({
+  id: '/tic-tac-toe',
+  path: '/tic-tac-toe',
   getParentRoute: () => rootRouteImport,
 } as any)
 const StopwatchRoute = StopwatchRouteImport.update({
@@ -36,6 +43,11 @@ const QuoteGeneratorRoute = QuoteGeneratorRouteImport.update({
   path: '/quote-generator',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GradientRoute = GradientRouteImport.update({
+  id: '/gradient',
+  path: '/gradient',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DiceRoute = DiceRouteImport.update({
   id: '/dice',
   path: '/dice',
@@ -50,26 +62,32 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dice': typeof DiceRoute
+  '/gradient': typeof GradientRoute
   '/quote-generator': typeof QuoteGeneratorRoute
   '/rock-paper-scissors': typeof RockPaperScissorsRoute
   '/stopwatch': typeof StopwatchRoute
+  '/tic-tac-toe': typeof TicTacToeRoute
   '/traffic-light': typeof TrafficLightRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dice': typeof DiceRoute
+  '/gradient': typeof GradientRoute
   '/quote-generator': typeof QuoteGeneratorRoute
   '/rock-paper-scissors': typeof RockPaperScissorsRoute
   '/stopwatch': typeof StopwatchRoute
+  '/tic-tac-toe': typeof TicTacToeRoute
   '/traffic-light': typeof TrafficLightRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/dice': typeof DiceRoute
+  '/gradient': typeof GradientRoute
   '/quote-generator': typeof QuoteGeneratorRoute
   '/rock-paper-scissors': typeof RockPaperScissorsRoute
   '/stopwatch': typeof StopwatchRoute
+  '/tic-tac-toe': typeof TicTacToeRoute
   '/traffic-light': typeof TrafficLightRoute
 }
 export interface FileRouteTypes {
@@ -77,34 +95,42 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/dice'
+    | '/gradient'
     | '/quote-generator'
     | '/rock-paper-scissors'
     | '/stopwatch'
+    | '/tic-tac-toe'
     | '/traffic-light'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/dice'
+    | '/gradient'
     | '/quote-generator'
     | '/rock-paper-scissors'
     | '/stopwatch'
+    | '/tic-tac-toe'
     | '/traffic-light'
   id:
     | '__root__'
     | '/'
     | '/dice'
+    | '/gradient'
     | '/quote-generator'
     | '/rock-paper-scissors'
     | '/stopwatch'
+    | '/tic-tac-toe'
     | '/traffic-light'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DiceRoute: typeof DiceRoute
+  GradientRoute: typeof GradientRoute
   QuoteGeneratorRoute: typeof QuoteGeneratorRoute
   RockPaperScissorsRoute: typeof RockPaperScissorsRoute
   StopwatchRoute: typeof StopwatchRoute
+  TicTacToeRoute: typeof TicTacToeRoute
   TrafficLightRoute: typeof TrafficLightRoute
 }
 
@@ -115,6 +141,13 @@ declare module '@tanstack/react-router' {
       path: '/traffic-light'
       fullPath: '/traffic-light'
       preLoaderRoute: typeof TrafficLightRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tic-tac-toe': {
+      id: '/tic-tac-toe'
+      path: '/tic-tac-toe'
+      fullPath: '/tic-tac-toe'
+      preLoaderRoute: typeof TicTacToeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/stopwatch': {
@@ -138,6 +171,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof QuoteGeneratorRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/gradient': {
+      id: '/gradient'
+      path: '/gradient'
+      fullPath: '/gradient'
+      preLoaderRoute: typeof GradientRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dice': {
       id: '/dice'
       path: '/dice'
@@ -158,9 +198,11 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DiceRoute: DiceRoute,
+  GradientRoute: GradientRoute,
   QuoteGeneratorRoute: QuoteGeneratorRoute,
   RockPaperScissorsRoute: RockPaperScissorsRoute,
   StopwatchRoute: StopwatchRoute,
+  TicTacToeRoute: TicTacToeRoute,
   TrafficLightRoute: TrafficLightRoute,
 }
 export const routeTree = rootRouteImport
