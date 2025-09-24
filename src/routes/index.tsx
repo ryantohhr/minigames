@@ -38,6 +38,10 @@ function Home() {
       path: "/wack-a-mole",
       title: "Wack A Mole",
     },
+    {
+      path: "/quiz",
+      title: "Quiz",
+    },
   ];
 
   return (

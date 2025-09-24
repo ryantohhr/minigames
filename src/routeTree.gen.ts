@@ -9,15 +9,22 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WackAMoleRouteImport } from './routes/wack-a-mole'
 import { Route as TrafficLightRouteImport } from './routes/traffic-light'
 import { Route as TicTacToeRouteImport } from './routes/tic-tac-toe'
 import { Route as StopwatchRouteImport } from './routes/stopwatch'
 import { Route as RockPaperScissorsRouteImport } from './routes/rock-paper-scissors'
 import { Route as QuoteGeneratorRouteImport } from './routes/quote-generator'
+import { Route as QuizRouteImport } from './routes/quiz'
 import { Route as GradientRouteImport } from './routes/gradient'
 import { Route as DiceRouteImport } from './routes/dice'
 import { Route as IndexRouteImport } from './routes/index'
 
+const WackAMoleRoute = WackAMoleRouteImport.update({
+  id: '/wack-a-mole',
+  path: '/wack-a-mole',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TrafficLightRoute = TrafficLightRouteImport.update({
   id: '/traffic-light',
   path: '/traffic-light',
@@ -43,6 +50,11 @@ const QuoteGeneratorRoute = QuoteGeneratorRouteImport.update({
   path: '/quote-generator',
   getParentRoute: () => rootRouteImport,
 } as any)
+const QuizRoute = QuizRouteImport.update({
+  id: '/quiz',
+  path: '/quiz',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GradientRoute = GradientRouteImport.update({
   id: '/gradient',
   path: '/gradient',
@@ -63,32 +75,38 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dice': typeof DiceRoute
   '/gradient': typeof GradientRoute
+  '/quiz': typeof QuizRoute
   '/quote-generator': typeof QuoteGeneratorRoute
   '/rock-paper-scissors': typeof RockPaperScissorsRoute
   '/stopwatch': typeof StopwatchRoute
   '/tic-tac-toe': typeof TicTacToeRoute
   '/traffic-light': typeof TrafficLightRoute
+  '/wack-a-mole': typeof WackAMoleRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dice': typeof DiceRoute
   '/gradient': typeof GradientRoute
+  '/quiz': typeof QuizRoute
   '/quote-generator': typeof QuoteGeneratorRoute
   '/rock-paper-scissors': typeof RockPaperScissorsRoute
   '/stopwatch': typeof StopwatchRoute
   '/tic-tac-toe': typeof TicTacToeRoute
   '/traffic-light': typeof TrafficLightRoute
+  '/wack-a-mole': typeof WackAMoleRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/dice': typeof DiceRoute
   '/gradient': typeof GradientRoute
+  '/quiz': typeof QuizRoute
   '/quote-generator': typeof QuoteGeneratorRoute
   '/rock-paper-scissors': typeof RockPaperScissorsRoute
   '/stopwatch': typeof StopwatchRoute
   '/tic-tac-toe': typeof TicTacToeRoute
   '/traffic-light': typeof TrafficLightRoute
+  '/wack-a-mole': typeof WackAMoleRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -96,46 +114,61 @@ export interface FileRouteTypes {
     | '/'
     | '/dice'
     | '/gradient'
+    | '/quiz'
     | '/quote-generator'
     | '/rock-paper-scissors'
     | '/stopwatch'
     | '/tic-tac-toe'
     | '/traffic-light'
+    | '/wack-a-mole'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/dice'
     | '/gradient'
+    | '/quiz'
     | '/quote-generator'
     | '/rock-paper-scissors'
     | '/stopwatch'
     | '/tic-tac-toe'
     | '/traffic-light'
+    | '/wack-a-mole'
   id:
     | '__root__'
     | '/'
     | '/dice'
     | '/gradient'
+    | '/quiz'
     | '/quote-generator'
     | '/rock-paper-scissors'
     | '/stopwatch'
     | '/tic-tac-toe'
     | '/traffic-light'
+    | '/wack-a-mole'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DiceRoute: typeof DiceRoute
   GradientRoute: typeof GradientRoute
+  QuizRoute: typeof QuizRoute
   QuoteGeneratorRoute: typeof QuoteGeneratorRoute
   RockPaperScissorsRoute: typeof RockPaperScissorsRoute
   StopwatchRoute: typeof StopwatchRoute
   TicTacToeRoute: typeof TicTacToeRoute
   TrafficLightRoute: typeof TrafficLightRoute
+  WackAMoleRoute: typeof WackAMoleRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/wack-a-mole': {
+      id: '/wack-a-mole'
+      path: '/wack-a-mole'
+      fullPath: '/wack-a-mole'
+      preLoaderRoute: typeof WackAMoleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/traffic-light': {
       id: '/traffic-light'
       path: '/traffic-light'
@@ -171,6 +204,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof QuoteGeneratorRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/quiz': {
+      id: '/quiz'
+      path: '/quiz'
+      fullPath: '/quiz'
+      preLoaderRoute: typeof QuizRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/gradient': {
       id: '/gradient'
       path: '/gradient'
@@ -199,11 +239,13 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DiceRoute: DiceRoute,
   GradientRoute: GradientRoute,
+  QuizRoute: QuizRoute,
   QuoteGeneratorRoute: QuoteGeneratorRoute,
   RockPaperScissorsRoute: RockPaperScissorsRoute,
   StopwatchRoute: StopwatchRoute,
   TicTacToeRoute: TicTacToeRoute,
   TrafficLightRoute: TrafficLightRoute,
+  WackAMoleRoute: WackAMoleRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
