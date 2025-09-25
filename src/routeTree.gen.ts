@@ -17,6 +17,7 @@ import { Route as RockPaperScissorsRouteImport } from './routes/rock-paper-sciss
 import { Route as QuoteGeneratorRouteImport } from './routes/quote-generator'
 import { Route as QuizRouteImport } from './routes/quiz'
 import { Route as GradientRouteImport } from './routes/gradient'
+import { Route as ExpensesRouteImport } from './routes/expenses'
 import { Route as DiceRouteImport } from './routes/dice'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -60,6 +61,11 @@ const GradientRoute = GradientRouteImport.update({
   path: '/gradient',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ExpensesRoute = ExpensesRouteImport.update({
+  id: '/expenses',
+  path: '/expenses',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DiceRoute = DiceRouteImport.update({
   id: '/dice',
   path: '/dice',
@@ -74,6 +80,7 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dice': typeof DiceRoute
+  '/expenses': typeof ExpensesRoute
   '/gradient': typeof GradientRoute
   '/quiz': typeof QuizRoute
   '/quote-generator': typeof QuoteGeneratorRoute
@@ -86,6 +93,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dice': typeof DiceRoute
+  '/expenses': typeof ExpensesRoute
   '/gradient': typeof GradientRoute
   '/quiz': typeof QuizRoute
   '/quote-generator': typeof QuoteGeneratorRoute
@@ -99,6 +107,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/dice': typeof DiceRoute
+  '/expenses': typeof ExpensesRoute
   '/gradient': typeof GradientRoute
   '/quiz': typeof QuizRoute
   '/quote-generator': typeof QuoteGeneratorRoute
@@ -113,6 +122,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/dice'
+    | '/expenses'
     | '/gradient'
     | '/quiz'
     | '/quote-generator'
@@ -125,6 +135,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/dice'
+    | '/expenses'
     | '/gradient'
     | '/quiz'
     | '/quote-generator'
@@ -137,6 +148,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/dice'
+    | '/expenses'
     | '/gradient'
     | '/quiz'
     | '/quote-generator'
@@ -150,6 +162,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DiceRoute: typeof DiceRoute
+  ExpensesRoute: typeof ExpensesRoute
   GradientRoute: typeof GradientRoute
   QuizRoute: typeof QuizRoute
   QuoteGeneratorRoute: typeof QuoteGeneratorRoute
@@ -218,6 +231,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GradientRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/expenses': {
+      id: '/expenses'
+      path: '/expenses'
+      fullPath: '/expenses'
+      preLoaderRoute: typeof ExpensesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dice': {
       id: '/dice'
       path: '/dice'
@@ -238,6 +258,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DiceRoute: DiceRoute,
+  ExpensesRoute: ExpensesRoute,
   GradientRoute: GradientRoute,
   QuizRoute: QuizRoute,
   QuoteGeneratorRoute: QuoteGeneratorRoute,
