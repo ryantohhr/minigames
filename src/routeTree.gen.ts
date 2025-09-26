@@ -19,6 +19,7 @@ import { Route as QuizRouteImport } from './routes/quiz'
 import { Route as GradientRouteImport } from './routes/gradient'
 import { Route as ExpensesRouteImport } from './routes/expenses'
 import { Route as DiceRouteImport } from './routes/dice'
+import { Route as CalculatorRouteImport } from './routes/calculator'
 import { Route as IndexRouteImport } from './routes/index'
 
 const WackAMoleRoute = WackAMoleRouteImport.update({
@@ -71,6 +72,11 @@ const DiceRoute = DiceRouteImport.update({
   path: '/dice',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CalculatorRoute = CalculatorRouteImport.update({
+  id: '/calculator',
+  path: '/calculator',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -79,6 +85,7 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/calculator': typeof CalculatorRoute
   '/dice': typeof DiceRoute
   '/expenses': typeof ExpensesRoute
   '/gradient': typeof GradientRoute
@@ -92,6 +99,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/calculator': typeof CalculatorRoute
   '/dice': typeof DiceRoute
   '/expenses': typeof ExpensesRoute
   '/gradient': typeof GradientRoute
@@ -106,6 +114,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/calculator': typeof CalculatorRoute
   '/dice': typeof DiceRoute
   '/expenses': typeof ExpensesRoute
   '/gradient': typeof GradientRoute
@@ -121,6 +130,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/calculator'
     | '/dice'
     | '/expenses'
     | '/gradient'
@@ -134,6 +144,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/calculator'
     | '/dice'
     | '/expenses'
     | '/gradient'
@@ -147,6 +158,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/calculator'
     | '/dice'
     | '/expenses'
     | '/gradient'
@@ -161,6 +173,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CalculatorRoute: typeof CalculatorRoute
   DiceRoute: typeof DiceRoute
   ExpensesRoute: typeof ExpensesRoute
   GradientRoute: typeof GradientRoute
@@ -245,6 +258,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DiceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/calculator': {
+      id: '/calculator'
+      path: '/calculator'
+      fullPath: '/calculator'
+      preLoaderRoute: typeof CalculatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -257,6 +277,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CalculatorRoute: CalculatorRoute,
   DiceRoute: DiceRoute,
   ExpensesRoute: ExpensesRoute,
   GradientRoute: GradientRoute,

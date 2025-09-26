@@ -46,6 +46,10 @@ function Home() {
       path: "/expenses",
       title: "Expenses",
     },
+    {
+      path: "/calculator",
+      title: "Calculator",
+    },
   ];
 
   return (
