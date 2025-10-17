@@ -38,7 +38,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <head>
         <HeadContent />
       </head>
-      <body>
+      <body className="h-screen">
         <QueryClientProvider client={queryClient}>
           {children}
         </QueryClientProvider>
