@@ -50,6 +50,10 @@ function Home() {
       path: "/calculator",
       title: "Calculator",
     },
+    {
+      path: "/hangman",
+      title: "Hangman",
+    },
   ];
 
   return (

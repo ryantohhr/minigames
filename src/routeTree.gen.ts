@@ -16,6 +16,7 @@ import { Route as StopwatchRouteImport } from './routes/stopwatch'
 import { Route as RockPaperScissorsRouteImport } from './routes/rock-paper-scissors'
 import { Route as QuoteGeneratorRouteImport } from './routes/quote-generator'
 import { Route as QuizRouteImport } from './routes/quiz'
+import { Route as HangmanRouteImport } from './routes/hangman'
 import { Route as GradientRouteImport } from './routes/gradient'
 import { Route as ExpensesRouteImport } from './routes/expenses'
 import { Route as DiceRouteImport } from './routes/dice'
@@ -57,6 +58,11 @@ const QuizRoute = QuizRouteImport.update({
   path: '/quiz',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HangmanRoute = HangmanRouteImport.update({
+  id: '/hangman',
+  path: '/hangman',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GradientRoute = GradientRouteImport.update({
   id: '/gradient',
   path: '/gradient',
@@ -89,6 +95,7 @@ export interface FileRoutesByFullPath {
   '/dice': typeof DiceRoute
   '/expenses': typeof ExpensesRoute
   '/gradient': typeof GradientRoute
+  '/hangman': typeof HangmanRoute
   '/quiz': typeof QuizRoute
   '/quote-generator': typeof QuoteGeneratorRoute
   '/rock-paper-scissors': typeof RockPaperScissorsRoute
@@ -103,6 +110,7 @@ export interface FileRoutesByTo {
   '/dice': typeof DiceRoute
   '/expenses': typeof ExpensesRoute
   '/gradient': typeof GradientRoute
+  '/hangman': typeof HangmanRoute
   '/quiz': typeof QuizRoute
   '/quote-generator': typeof QuoteGeneratorRoute
   '/rock-paper-scissors': typeof RockPaperScissorsRoute
@@ -118,6 +126,7 @@ export interface FileRoutesById {
   '/dice': typeof DiceRoute
   '/expenses': typeof ExpensesRoute
   '/gradient': typeof GradientRoute
+  '/hangman': typeof HangmanRoute
   '/quiz': typeof QuizRoute
   '/quote-generator': typeof QuoteGeneratorRoute
   '/rock-paper-scissors': typeof RockPaperScissorsRoute
@@ -134,6 +143,7 @@ export interface FileRouteTypes {
     | '/dice'
     | '/expenses'
     | '/gradient'
+    | '/hangman'
     | '/quiz'
     | '/quote-generator'
     | '/rock-paper-scissors'
@@ -148,6 +158,7 @@ export interface FileRouteTypes {
     | '/dice'
     | '/expenses'
     | '/gradient'
+    | '/hangman'
     | '/quiz'
     | '/quote-generator'
     | '/rock-paper-scissors'
@@ -162,6 +173,7 @@ export interface FileRouteTypes {
     | '/dice'
     | '/expenses'
     | '/gradient'
+    | '/hangman'
     | '/quiz'
     | '/quote-generator'
     | '/rock-paper-scissors'
@@ -177,6 +189,7 @@ export interface RootRouteChildren {
   DiceRoute: typeof DiceRoute
   ExpensesRoute: typeof ExpensesRoute
   GradientRoute: typeof GradientRoute
+  HangmanRoute: typeof HangmanRoute
   QuizRoute: typeof QuizRoute
   QuoteGeneratorRoute: typeof QuoteGeneratorRoute
   RockPaperScissorsRoute: typeof RockPaperScissorsRoute
@@ -237,6 +250,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof QuizRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/hangman': {
+      id: '/hangman'
+      path: '/hangman'
+      fullPath: '/hangman'
+      preLoaderRoute: typeof HangmanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/gradient': {
       id: '/gradient'
       path: '/gradient'
@@ -281,6 +301,7 @@ const rootRouteChildren: RootRouteChildren = {
   DiceRoute: DiceRoute,
   ExpensesRoute: ExpensesRoute,
   GradientRoute: GradientRoute,
+  HangmanRoute: HangmanRoute,
   QuizRoute: QuizRoute,
   QuoteGeneratorRoute: QuoteGeneratorRoute,
   RockPaperScissorsRoute: RockPaperScissorsRoute,
